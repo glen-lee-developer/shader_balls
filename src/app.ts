@@ -9,17 +9,18 @@ import fragmentShader from "./shaders/fragment.glsl";
 function init(): void {
   const canvas = document.getElementById("canvas") as HTMLCanvasElement;
   const scene = new THREE.Scene();
-  const camera = createCamera();
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
 
+  //  Setup
   addLights(scene);
-  const controls = setupControls(camera, renderer);
-  setupResize(camera, renderer);
+  const camera = createCamera();
+  setupControls(camera, renderer);
+  const { width, height } = setupResize(camera, renderer);
 
   //  Test Mesh
-
   const geometry = new THREE.PlaneGeometry(1, 1, 50, 50);
   const material = new THREE.ShaderMaterial({
+    side: THREE.DoubleSide,
     uniforms: {
       time: { value: 0 },
     },
@@ -32,6 +33,8 @@ function init(): void {
   //  Animate
   function animateFrame(): void {
     requestAnimationFrame(animateFrame);
+    // importable function  mouse coordinates
+
     (myMesh.material as THREE.ShaderMaterial).uniforms.time.value += 0.01;
     renderer.render(scene, camera);
   }

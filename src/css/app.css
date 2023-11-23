@@ -1,11 +1,17 @@
-body {
-  background-color: #ccc;
-}
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
-#canvas {
-  width: 100%;
+
+body {
+  background-color: #fff;
+  margin: 0;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  width: 100vw;
   height: 100vh;
 }
