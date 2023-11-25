@@ -22,7 +22,8 @@ function init(): void {
   const material = new THREE.ShaderMaterial({
     side: THREE.DoubleSide,
     uniforms: {
-      time: { value: 0 },
+      uResolution: { value: new THREE.Vector2(width, height) },
+      uTime: { value: 0 },
     },
     vertexShader,
     fragmentShader,
@@ -33,9 +34,7 @@ function init(): void {
   //  Animate
   function animateFrame(): void {
     requestAnimationFrame(animateFrame);
-    // importable function  mouse coordinates
-
-    (myMesh.material as THREE.ShaderMaterial).uniforms.time.value += 0.01;
+    (myMesh.material as THREE.ShaderMaterial).uniforms.uTime.value += 0.01;
     renderer.render(scene, camera);
   }
   animateFrame();
